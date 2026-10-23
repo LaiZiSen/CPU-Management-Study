@@ -1,49 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct {
-    int arrivalTime;
-    int serviceTime;
-}Process;
-
-typedef struct {
-    Process *arr;
-    int length;
-}ProcessArr;
-
-enum ALGO{
-    null,
-    FCFS,
-    SPN,
-    SRT,
-    RR,
-    HRRN,
-    MFQ
-};
-
-const char Algorithm [7][64] = {
-    "NULL",
-    "First Come First Served (FCFS)",
-    "Shortest Process Next (SPN)",
-    "Shortest Remaining Time (SRT)",
-    "Round Robin (RR)",
-    "Highest Response Ratio Next (HRRN)",
-    "Multilevel Feedback Queue Scheduling (MFQ)"
-};
+#include "header/func.h"
+#include "header/process.h"
+#include "header/algo.h"
 
 void welcome();
 void mainMenu();
-void printProcessArr(ProcessArr);
-void printAlgorithm(enum ALGO);
-void addProcess(ProcessArr);
-char getChoice();
-void clear();
-void getAlgorithm(enum ALGO*);
 
 int main () {
 
-    ProcessArr processArr;
-    enum ALGO algorithm = null;
+    ProcessList processArr;
+    enum ALGO algorithm= null;
 
     processArr.length = 5;
     processArr.arr = malloc(sizeof(Process) * processArr.length);
@@ -110,58 +77,3 @@ void mainMenu(){
     printf("\n");
 }
 
-void printProcessArr(ProcessArr processArr) {
-    printf("Process List: \n");
-
-    if(processArr.length <= 0) {
-        printf("Empty \n");
-        return;
-    }
-
-    printf("%4s", "AT |");
-    for (int  i = 0; i < processArr.length; i++) {
-        printf("%2d |", processArr.arr[i].arrivalTime);
-    }
-    printf("\n");
-    
-    printf("%4s", "ST |");
-    for (int i = 0; i < processArr.length; i++) {
-        printf("%2d |", processArr.arr[i].serviceTime);
-    }
-    printf("\n\n");
-
-}
-
-void printAlgorithm(enum ALGO algo) {
-    printf("Algorithm selected: %s\n\n", Algorithm[algo]);
-}
-
-void addProcess(ProcessArr processArr) {
-    // get arrival time
-    //
-    // get service time
-    //
-    // 
-}
-
-void clear() {
-    printf("\033[H\033[2J");
-}
-
-char getChoice() {
-    char choice;
-
-    printf("%s", "Enter Choice: ");
-    scanf("%c", &choice);
-
-    return choice;
-}
-
-int getInt(char* msg) {
-    int output;
-
-    printf("%s", msg);
-    scanf("%d", &output);
-
-    return output;
-}
